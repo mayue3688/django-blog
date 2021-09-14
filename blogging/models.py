@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
+
 
 # Create your models here.
 class Post(models.Model):
@@ -24,5 +26,8 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
-
     pass
+
+
+class CategoryInLine(admin.TabularInline):
+    model = Category
