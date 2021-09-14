@@ -4,7 +4,7 @@ from blogging.models import Post, Category
 
 
 class CategoryInLine(admin.TabularInline):
-    model = Category
+    model = Category.posts.through
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -12,11 +12,13 @@ class PostAdmin(admin.ModelAdmin):
         CategoryInLine,
                ]
 
-    class Meta:
-        model = Category
 
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [
+        CategoryInLine,
+               ]
     exclude = ('posts',)
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
